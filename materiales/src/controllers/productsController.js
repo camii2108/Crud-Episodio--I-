@@ -10,6 +10,7 @@ const controller = {
 	// Root - Show all products
 	index: (req, res) => {
 		// Do the magic
+		res.render("products", {products,toThousand})
 	},
 
 	// Detail - Detail from one product
