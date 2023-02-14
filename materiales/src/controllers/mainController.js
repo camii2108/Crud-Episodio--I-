@@ -14,7 +14,7 @@ const controller = {
 		res.render("index", { // te rendecria o lleva auna vista 
 			productsVisited, 
 			productsInSale,
-			toThousand
+			toThousand 
 		})
 	},
 	search: (req, res) => {
