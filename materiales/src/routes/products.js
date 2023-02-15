@@ -9,12 +9,12 @@ const productsController = require('../controllers/productsController');
 router.get('/', productsController.index); 
 
 /*** CREATE ONE PRODUCT ***/ 
-//router.???('/???/', productsController.create); 
+router.get('/create/', productsController.create); 
 //router.???('/', productsController.store); 
 
 
 /*** GET ONE PRODUCT ***/ 
-//router.???('/:id/', productsController.detail); 
+router.get('/detail/:id/', productsController.detail); 
 
 /*** EDIT ONE PRODUCT ***/ 
 //router.???('/:id/???', productsController.edit); 
