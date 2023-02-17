@@ -22,7 +22,9 @@ const controller = {
 		// Do the magic
 		let productId = Number(req.params.id);
 
-		let product = products.find(product => product.id === productId);
+		let product = products.find(product => {/*  FUNDAMENTO DE LA FUNCION FLECHA:va entre llaves y return */
+			 return product.id === productId;
+		});
 
 		res.render("detail", {
 			product,
@@ -41,20 +43,12 @@ const controller = {
 	store: (req, res) => {
 		// Do the magic => OBTENER LOS DATOS DEL FORMULARIO
 		/* res.send(req.body) */ /* req= params, body,ect  */
-		/*  "id": 1,
-  "name": "Cafetera Moulinex Dolce Gusto Edited",
-  "price": 100,
-  "discount": 50,
-  "category": "visited",
-  "description": "Cafetera Dolce Gusto Lumio. La cafetera Dolce Gusto Lumio es de variedad automática que ha llegado con un diseño radical al que nos tenía acostumbrados Dolce Gusto.En este post te contamos todo lo que necesitas saber sobre ella, desde sus características técnicas hasta la calidad de las cápsulas o price.",
-  "image": "img-cafetera-moulinex.jpg" */
-
 		let lastId = products[products.length - 1].id;
-		console.log(lastId)	
+		/* console.log(lastId)	 */
 
 		let newProduct = {
 			id: lastId + 1,/* por cada producto se agrega un nuevo ID */
-			name:req.body.name ,/* accedo a la prodiedad del nombre que tengo en el documento body */
+			name: req.body.name ,/* accedo a la prodiedad del nombre que tengo en el documento body */
 			price: req.body.price,
 			discount: req.body.discount,
 			category: req.body.category,
@@ -64,23 +58,62 @@ const controller = {
 
 		products.push(newProduct); /* me pushea los nuevos productos que subamos en el fomulario */
 		/* res.send(products) */ /* me envia o muestra los productos/array de objetos json en el body */
-		writeJson(products);
+		writeJson(products);/* sobre escribe el json */
 
-		res.redirect("/products/")
+		res.redirect("/products/");
 	},
 
 	// Update - Form to edit
 	edit: (req, res) => {
 		// Do the magic
+		let productId = Number(req.params.id);/* Lo ejecuto como dato Number ya que si ahgo igualdas estricata me falla */
+		let productToEdit = products.find(product => product.id === productId);/* retorna tru si este producto conincide con este objetoo propiedad */
+
+		res.render("product-edit-form", {
+			productToEdit, /* sigue seindo u producto literal, aunque se llamen igaul las variables productToEdit en la vista  product-edit-form.ejs */	
+		})
 	},
 	// Update - Method to update
 	update: (req, res) => {
 		// Do the magic
+		let productId = Number(req.params.id);
+
+	products.forEach(product => {
+		if(product.id === productId){
+			product.name = req.body.name;
+			product.price = req.body.price;
+			product.discount = req.body.discount;
+			product.category = req.body.category;
+			product.description = req.body.description;
+		}
+	});		
+		writeJson(products);
+
+		res.send("Producto editado correctamente");
+
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
-		// Do the magic
+		// Do the magic:obtener el id del req params
+		let productId = Number(req.params.id); /*  */
+
+		//Busco el producto eliminar y lo borro del array
+		products.forEach( product => {
+			if(product.id === productId){
+				let productToDestroy = products.indexOf(product);
+				products.splice(productToDestroy, 1) 
+			}
+		})
+
+		/* let newProductArray = products.filter(product => product.id !== productId) *//*  voy a tenener todos los productos menos el que quiero */
+
+		//Sobre escribo el json con el array de productos modidifcados
+		writeJson(products)
+		
+		// retorno un mensaje de exito 
+		res.send("El producto fue destruido")
+
 	}
 };
 

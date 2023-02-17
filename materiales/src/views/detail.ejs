@@ -11,7 +11,7 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Detalle del producto: <%=product.name%></h2>
+				<h2 class="products-title">Detalle del producto: <%= product.name %></h2>
 			</div>
 		</div>
 		<div class="product-detail">
@@ -19,7 +19,7 @@
 				<div class="col-12 col-lg-8">
 					<img src="/images/products/<%=product.image%>" alt="product image" class="product-detail-img">
 					<p class="product-detail-description">
-						<%=product.description%>
+						<%= product.description %>
 					</p>
 				</div>
 				<div class="col-12 col-lg-4">
@@ -56,9 +56,9 @@
 						<a href="#" class="buy-now-button">COMPRAR AHORA</a>
 						<hr>
 
-						<a href="/products/edit/<%= product.id %>" class="action-button edit">EDITAR PRODUCTO</a>
-						<form action="/products/delete/<%= product.id %>" method="POST" style="display: inline-flex">
-							<button type="submit" class="action-button delete">ELIMINAR</button>
+						<a href="/products/edit/<%= product.id %>" class="action-button edit">EDITAR PRODUCTO</a><!-- NO hago un PUT es un link  que me lleva a una ruta-->
+						<form action="/products/delete/<%= product.id %>?_method=DELETE" method="POST" style="display: inline-flex">
+							<button type="submit" class="action-button delete">ELIMINAR</button><!--  DELETE me lleva a eliminar todo, hace http, GET post -->
 						</form>
 					</article>
 				</div>

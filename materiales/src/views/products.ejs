@@ -26,8 +26,9 @@
 								<h2><%- product.price/* un valor */ - (product.price * product.discount / 100)/* multiplico el valor por el precio y lo divido por 100 */ %></h2> <!-- Regla de 3 simples:  -->
 								<% if (product.discount > 0) { %>
 									<span><%- product.discount %> %OFF!! </span>
-								<% } %>								<p><%- product.name  %></p>
-								<i class="fas fa-truck"></i>
+									<p><%- product.name  %></p>
+									<i class="fas fa-truck"></i>
+								<% } %>	
 							</article>
 						</a>
 					</section>

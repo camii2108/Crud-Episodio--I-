@@ -16,13 +16,13 @@ router.post('/', productsController.store);
 /*** GET ONE PRODUCT ***/ 
 router.get('/detail/:id/', productsController.detail); 
 
-/*** EDIT ONE PRODUCT ***/ 
-//router.???('/:id/???', productsController.edit); 
-//router.???('/:id', productsController.update); 
+/*** EDIT ONE PRODUCT, se diferencian en el metodo http ***/ 
+router.get('/edit/:id', productsController.edit); 
+router.put('/edit/:id', productsController.update); /* recibo datos en caso de modificacion =>RELEAD */
 
 
 /*** DELETE ONE PRODUCT***/ 
-//router.???('/:id', productsController.destroy); 
+router.delete('/delete/:id', productsController.destroy); 
 
 
 module.exports = router;
